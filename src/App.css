@@ -72,8 +72,7 @@ button:hover {
 }
 img{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  height: 150px;
+  width: 150;
   margin-bottom: 5px;
-  width: 50%;
 }
