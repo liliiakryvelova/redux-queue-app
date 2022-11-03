@@ -1,5 +1,6 @@
 import ticketListReducer from '../../reducers/ticket-list-reducer';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
+import * as a from '../../actions';
 
 
 describe('ticketListReducer', () => {
@@ -33,13 +34,12 @@ describe('ticketListReducer', () => {
 
   test('Should successfully add new ticket data to mainTicketList', () => {
     const { names, location, issue, id } = ticketData;
-    action = {
-      type: 'ADD_TICKET',
-      names: names,
-      location: location,
-      issue: issue,
-      id: id
-    };
+    action = a.addTicket({
+      names: 'Ryan & Aimen',
+      location: '4b',
+      issue: 'Redux action is not working correctly.',
+      id: 1
+    });
     expect(ticketListReducer({}, action)).toEqual({
       [id] : {
         names: names,
@@ -51,10 +51,7 @@ describe('ticketListReducer', () => {
   });
 
   test('Should successfully delete a ticket', () => {
-    action = {
-      type: 'DELETE_TICKET',
-      id: 1
-    };
+    const action = a.deleteTicket(1);
     expect(ticketListReducer(currentState, action)).toEqual({
       2: {
         names: 'Jasmine and Justine',
