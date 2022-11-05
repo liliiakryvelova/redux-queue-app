@@ -1,8 +1,11 @@
 import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
-import formVisibleReducer from '../../reducers/form-visible-reducer';
+import { ADD_TICKET } from '../../actions/ActionTypes';
+import formVisibleReducer from '../../reducers/form-visible-reducer'
 import ticketListReducer from '../../reducers/ticket-list-reducer';
-import * as a from '../../actions';
+import * as a from '../../actions'
+
+
 
 let store = createStore(rootReducer);
 
@@ -19,14 +22,19 @@ describe("rootReducer", () => {
     expect(store.getState().mainTicketList).toEqual(ticketListReducer(undefined, { type: null }));
   });
 
+  test('Check that initial state of formVisibleReducer matches root reducer', () => {
+    expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
+  });
+
   test('Check that ADD_TICKET action works for ticketListReducer and root reducer', () => {
     
-    const action = a.addTicket({
+    const action = {
+      type: 'ADD_TICKET',
       names: 'Jo and Jasmine', 
       location: '3E', 
       issue: 'Redux not working!', 
       id: 1
-    });
+    };
     store.dispatch(action);
     expect(store.getState().mainTicketList).toEqual(ticketListReducer(undefined, action));
   });
@@ -37,8 +45,6 @@ describe("rootReducer", () => {
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, action));
   });
   
-  // test('Check that initial state of formVisibleReducer matches root reducer', () => {
-  //   expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
-  // });
+  
 
 });

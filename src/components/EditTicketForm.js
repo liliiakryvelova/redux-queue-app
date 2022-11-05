@@ -8,7 +8,14 @@ function EditTicketForm(props){
   function handleEditTicketFormSubmission(event) {
     event.preventDefault();
     console.log(event.target.names.value);
-    props.onEditTicket({names: event.target.names.value, location: event.target.location.value, issue: event.target.issue.value, id: ticket.id});
+    props.onEditTicket({
+      names: event.target.names.value,
+      location: event.target.location.value,
+      issue: event.target.issue.value,
+      id: ticket.id,
+      timeOpen: ticket.timeOpen,
+      formattedWaitTime: ticket.formattedWaitTime
+    });
   }
 
   return (
